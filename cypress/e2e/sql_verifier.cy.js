@@ -1,9 +1,13 @@
 import "cypress-iframe";
 
 beforeEach(() => {
+  Cypress.config(
+    "baseUrl",
+    "https://sqlverifier-staging-08050d656f7a.herokuapp.com"
+  );
   cy.visit("/login");
-  cy.get('input[name="username"]').type("adele");
-  cy.get('input[name="password"]').type("123456");
+  cy.get('input[name="username"]').type(Cypress.env("loginUsername"));
+  cy.get('input[name="password"]').type(Cypress.env("loginPassword"));
   cy.get('button[type="submit"]').click();
   cy.url().should("include", "/?page=1&sort=id,asc");
 });
@@ -34,9 +38,9 @@ describe("Check all links working after user student login", () => {
   it("Check the Edit button on the View task page", () => {
     cy.get("#entity-menu").click();
     cy.get(".dropdown-menu").find(".dropdown-item[href='/task']").click();
-    cy.get(".btn-info[href='/task/1103']").click();
-    cy.url().should("include", "/task/1103");
-    cy.get(".btn-primary[href='/task/1103/edit']")
+    cy.get(".btn-info[href='/task/1101']").click();
+    cy.url().should("include", "/task/1101");
+    cy.get(".btn-primary[href='/task/1101/edit']")
       .should("exist")
       .and("be.visible");
   });
@@ -44,9 +48,9 @@ describe("Check all links working after user student login", () => {
   it("Check the Title field on the Edit task page", () => {
     cy.get("#entity-menu").click();
     cy.get(".dropdown-menu").find(".dropdown-item[href='/task']").click();
-    cy.get(".btn-info[href='/task/1103']").click();
-    cy.get(".btn-primary[href='/task/1103/edit']").click();
-    cy.url().should("include", "/task/1103/edit");
+    cy.get(".btn-info[href='/task/1101']").click();
+    cy.get(".btn-primary[href='/task/1101/edit']").click();
+    cy.url().should("include", "/task/1101/edit");
     cy.get("#task-title").should("exist").and("be.visible");
   });
 
@@ -59,10 +63,12 @@ describe("Check all links working after user student login", () => {
       .and("be.visible");
   });
 
-  it("Check message No user tasks found on the User task page", () => {
+  it("Check Pop-up window on the Delete user task page", () => {
     cy.get("#entity-menu").click();
     cy.get(".dropdown-menu").find(".dropdown-item[href='/user-task']").click();
-    cy.get(".alert.alert-warning").should("exist").and("be.visible");
+    cy.contains("Delete").click();
+    cy.get(".modal-content").should("exist").and("be.visible");
+    cy.url().should("include", "/user-task/35601/delete");
   });
 
   it("Check the User field on the Create a User task page", () => {
