@@ -6,7 +6,10 @@
   "scripts": {
     "cy:open": "npx cypress open",
     "cy:run": "npx cypress run",
-    "cy:open:dashboard": "npx cypress run --record --key 10b4f1fe-c9c0-4f86-8e19-7a5473013031"
+    "cy:run:first": "npx cypress run --spec cypress/e2e/sql_verifier_first.cy.js --browser chrome --record --key 10b4f1fe-c9c0-4f86-8e19-7a5473013031",
+    "cy:run:staging": "npx cypress run --spec cypress/e2e/sql_verifier_staging.cy.js --browser electron --record --key 10b4f1fe-c9c0-4f86-8e19-7a5473013031",
+    "cy:open:dashboard": "npx cypress run --record --key 10b4f1fe-c9c0-4f86-8e19-7a5473013031",
+    "cy:run:both": "npm run cy:run:first && npm run cy:run:staging"
   },
   "keywords": [
     "cypress"

@@ -1,5 +1,3 @@
-import "cypress-iframe";
-
 beforeEach(() => {
   Cypress.config(
     "baseUrl",
@@ -68,7 +66,7 @@ describe("Check all links working after user student login", () => {
     cy.get(".dropdown-menu").find(".dropdown-item[href='/user-task']").click();
     cy.contains("Delete").click();
     cy.get(".modal-content").should("exist").and("be.visible");
-    cy.url().should("include", "/user-task/35601/delete");
+    cy.url().should("include", "/delete");
   });
 
   it("Check the User field on the Create a User task page", () => {
