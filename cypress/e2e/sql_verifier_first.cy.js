@@ -1,3 +1,6 @@
+const selector = require("../fixtures/verifierSelector.json");
+const element = require("../fixtures/verifierElement.json");
+
 beforeEach(() => {
   cy.visit("/login");
   cy.get('input[name="username"]').type("adele");
@@ -7,126 +10,102 @@ beforeEach(() => {
 });
 
 describe("Check all links working after user student login", () => {
+  const menu = ".dropdown-menu";
+  const item = ".dropdown-item";
+  const entity = "#entity-menu";
+  const docs = "#docs-menu";
+  const account = "#account-menu";
   it("Check Refresh button on the task page", () => {
-    cy.get("#entity-menu").click();
-    cy.get(".dropdown-menu")
-      .find(".dropdown-item[href='/task']")
-      .should("exist")
-      .and("be.visible")
-      .click();
-    cy.url().should("include", "/task");
-    cy.get("button.me-2").should("exist").and("be.visible");
+    cy.clickFirstEl(entity);
+    cy.clickSecondEl(menu, `${item}[href='/task']`);
+    cy.checkUrl("/task");
+    cy.checkElement(element[0]);
   });
 
   it("Check the Save button on the Create a new task page", () => {
-    cy.get("#entity-menu").click();
-    cy.get(".dropdown-menu").find(".dropdown-item[href='/task']").click();
-    cy.get(".jh-create-entity[href='/task/new']")
-      .should("exist")
-      .and("be.visible")
-      .click();
-    cy.url().should("include", "/task/new");
-    cy.get("#save-entity").should("exist").and("be.visible");
+    cy.clickFirstEl(entity);
+    cy.clickSecondEl(menu, `${item}[href='/task']`);
+    cy.clickFirstEl(selector[0]);
+    cy.checkUrl("/task/new");
+    cy.checkElement(element[1]);
   });
 
   it("Check the Edit button on the View task page", () => {
-    cy.get("#entity-menu").click();
-    cy.get(".dropdown-menu").find(".dropdown-item[href='/task']").click();
-    cy.get(".btn-info[href='/task/1103']").click();
-    cy.url().should("include", "/task/1103");
-    cy.get(".btn-primary[href='/task/1103/edit']")
-      .should("exist")
-      .and("be.visible");
+    cy.clickFirstEl(entity);
+    cy.clickSecondEl(menu, `${item}[href='/task']`);
+    cy.clickFirstEl(selector[1]);
+    cy.checkUrl("/task/1103");
+    cy.checkElement(element[2]);
   });
 
   it("Check the Title field on the Edit task page", () => {
-    cy.get("#entity-menu").click();
-    cy.get(".dropdown-menu").find(".dropdown-item[href='/task']").click();
-    cy.get(".btn-info[href='/task/1103']").click();
-    cy.get(".btn-primary[href='/task/1103/edit']").click();
-    cy.url().should("include", "/task/1103/edit");
-    cy.get("#task-title").should("exist").and("be.visible");
+    cy.clickFirstEl(entity);
+    cy.clickSecondEl(menu, `${item}[href='/task']`);
+    cy.clickFirstEl(selector[1]);
+    cy.clickFirstEl(selector[2]);
+    cy.checkUrl("/task/1103/edit");
+    cy.checkElement(element[3]);
   });
 
   it("Check Create button on the User task page", () => {
-    cy.get("#entity-menu").click();
-    cy.get(".dropdown-menu").find(".dropdown-item[href='/user-task']").click();
-    cy.url().should("include", "/user-task");
-    cy.get(".jh-create-entity[href='/user-task/new']")
-      .should("exist")
-      .and("be.visible");
+    cy.clickFirstEl(entity);
+    cy.clickSecondEl(menu, `${item}[href='/user-task']`);
+    cy.checkUrl("/user-task");
+    cy.checkElement(element[4]);
   });
 
   it("Check alert No User Tasks found on the User task page", () => {
-    cy.get("#entity-menu").click();
-    cy.get(".dropdown-menu").find(".dropdown-item[href='/user-task']").click();
-    cy.get(".alert-warning").should("exist").and("be.visible");
-    cy.url().should("include", "/user-task");
+    cy.clickFirstEl(entity);
+    cy.clickSecondEl(menu, `${item}[href='/user-task']`);
+    cy.checkUrl("/user-task");
+    cy.checkElement(element[5]);
   });
 
   it("Check the User field on the Create a User task page", () => {
-    cy.get("#entity-menu").click();
-    cy.get(".dropdown-menu").find(".dropdown-item[href='/user-task']").click();
-    cy.get("a.btn").should("exist").and("be.visible").click();
-    cy.url().should("include", "/user-task/new");
-    cy.get("#user-task-user").should("exist").and("be.visible");
+    cy.clickFirstEl(entity);
+    cy.clickSecondEl(menu, `${item}[href='/user-task']`);
+    cy.clickFirstEl(selector[3]);
+    cy.checkUrl("/user-task/new");
+    cy.checkElement(element[6]);
   });
 
   it("Check the Save button on the Create a user task page", () => {
-    cy.get("#entity-menu").click();
-    cy.get(".dropdown-menu").find(".dropdown-item[href='/user-task']").click();
-    cy.get("#jh-create-entity").should("exist").and("be.visible").click();
-    cy.url().should("include", "/user-task/new");
-    cy.get("#save-entity").should("exist").and("be.visible");
+    cy.clickFirstEl(entity);
+    cy.clickSecondEl(menu, `${item}[href='/user-task']`);
+    cy.clickFirstEl(selector[4]);
+    cy.checkUrl("/user-task/new");
+    cy.checkElement(element[7]);
   });
 
   it("Check Select field on the Swagger page", () => {
-    cy.get("#docs-menu").click();
-    cy.get(".dropdown-menu")
-      .find(".dropdown-item[href='/docs/docs']")
-      .should("exist")
-      .and("be.visible")
-      .click();
-    cy.url().should("include", "/docs/docs");
+    cy.clickFirstEl(docs);
+    cy.clickSecondEl(menu, `${item}[href='/docs/docs']`);
+    cy.checkUrl("/docs/docs");
     cy.iframe("[data-cy='swagger-frame']").within(() => {
-      cy.get("#select").should("be.visible");
+      cy.checkElement(element[8]);
     });
   });
 
   it("Check GET method command on the Swagger page", () => {
-    cy.get("#docs-menu").click();
-    cy.get(".dropdown-menu")
-      .find(".dropdown-item[href='/docs/docs']")
-      .should("exist")
-      .and("be.visible")
-      .click();
-    cy.url().should("include", "/docs/docs");
+    cy.clickFirstEl(docs);
+    cy.clickSecondEl(menu, `${item}[href='/docs/docs']`);
+    cy.checkUrl("/docs/docs");
     cy.iframe("[data-cy='swagger-frame']").within(() => {
-      cy.get("#operations-user-task-resource-getUserTask")
-        .should("exist")
-        .and("be.visible");
+      cy.checkElement(element[9]);
     });
   });
 
   it("Check Language field on the Settings page", () => {
-    cy.get("#account-menu").click();
-    cy.get(".dropdown-menu")
-      .find(".dropdown-item[href='/account/settings']")
-      .should("exist")
-      .and("be.visible")
-      .click();
-    cy.url().should("include", "/account/settings");
-    cy.get("#langKey").should("exist").and("be.visible");
+    cy.clickFirstEl(account);
+    cy.clickSecondEl(menu, `${item}[href='/account/settings']`);
+    cy.checkUrl("/account/settings");
+    cy.checkElement(element[10]);
   });
 
   it("Check Save button on the Password page", () => {
-    cy.get("#account-menu").click();
-    cy.get(".dropdown-menu")
-      .find(".dropdown-item[href='/account/password']")
-      .should("exist")
-      .and("be.visible")
-      .click();
-    cy.url().should("include", "/account/password");
-    cy.get(".btn-success").should("exist").and("be.visible");
+    cy.clickFirstEl(account);
+    cy.clickSecondEl(menu, `${item}[href='/account/password']`);
+    cy.checkUrl("/account/password");
+    cy.checkElement(element[11]);
   });
 });

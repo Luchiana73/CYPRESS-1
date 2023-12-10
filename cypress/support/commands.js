@@ -24,3 +24,16 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import "cypress-iframe";
+
+Cypress.Commands.add("checkElement", (selector) => {
+  cy.get(selector).should("exist").and("be.visible");
+});
+Cypress.Commands.add("clickFirstEl", (selector) => {
+  cy.get(selector).click();
+});
+Cypress.Commands.add("clickSecondEl", (selector1, selector2) => {
+  cy.get(selector1).find(selector2).click();
+});
+Cypress.Commands.add("checkUrl", (endpoint) => {
+  cy.url().should("include", endpoint);
+});
