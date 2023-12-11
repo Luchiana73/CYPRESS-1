@@ -1,20 +1,19 @@
 const selector = require("../fixtures/verifierSelector.json");
 const element = require("../fixtures/verifierElement.json");
 
-beforeEach(() => {
-  cy.visit("/login");
-  cy.get('input[name="username"]').type("adele");
-  cy.get('input[name="password"]').type("123456");
-  cy.get('button[type="submit"]').click();
-  cy.url().should("include", "/?page=1&sort=id,asc");
-});
-
 describe("Check all links working after user student login", () => {
   const menu = ".dropdown-menu";
   const item = ".dropdown-item";
   const entity = "#entity-menu";
   const docs = "#docs-menu";
   const account = "#account-menu";
+  beforeEach(() => {
+    cy.visit("/login");
+    cy.get('input[name="username"]').type("adele");
+    cy.get('input[name="password"]').type("123456");
+    cy.clickFirstEl(selector[0]);
+    cy.checkUrl("/?page=1&sort=id,asc");
+  });
   it("Check Refresh button on the task page", () => {
     cy.clickFirstEl(entity);
     cy.clickSecondEl(menu, `${item}[href='/task']`);
@@ -25,7 +24,7 @@ describe("Check all links working after user student login", () => {
   it("Check the Save button on the Create a new task page", () => {
     cy.clickFirstEl(entity);
     cy.clickSecondEl(menu, `${item}[href='/task']`);
-    cy.clickFirstEl(selector[0]);
+    cy.clickFirstEl(selector[1]);
     cy.checkUrl("/task/new");
     cy.checkElement(element[1]);
   });
@@ -33,7 +32,7 @@ describe("Check all links working after user student login", () => {
   it("Check the Edit button on the View task page", () => {
     cy.clickFirstEl(entity);
     cy.clickSecondEl(menu, `${item}[href='/task']`);
-    cy.clickFirstEl(selector[1]);
+    cy.clickFirstEl(selector[2]);
     cy.checkUrl("/task/1103");
     cy.checkElement(element[2]);
   });
@@ -41,8 +40,8 @@ describe("Check all links working after user student login", () => {
   it("Check the Title field on the Edit task page", () => {
     cy.clickFirstEl(entity);
     cy.clickSecondEl(menu, `${item}[href='/task']`);
-    cy.clickFirstEl(selector[1]);
     cy.clickFirstEl(selector[2]);
+    cy.clickFirstEl(selector[3]);
     cy.checkUrl("/task/1103/edit");
     cy.checkElement(element[3]);
   });
@@ -64,7 +63,7 @@ describe("Check all links working after user student login", () => {
   it("Check the User field on the Create a User task page", () => {
     cy.clickFirstEl(entity);
     cy.clickSecondEl(menu, `${item}[href='/user-task']`);
-    cy.clickFirstEl(selector[3]);
+    cy.clickFirstEl(selector[4]);
     cy.checkUrl("/user-task/new");
     cy.checkElement(element[6]);
   });
@@ -72,7 +71,7 @@ describe("Check all links working after user student login", () => {
   it("Check the Save button on the Create a user task page", () => {
     cy.clickFirstEl(entity);
     cy.clickSecondEl(menu, `${item}[href='/user-task']`);
-    cy.clickFirstEl(selector[4]);
+    cy.clickFirstEl(selector[5]);
     cy.checkUrl("/user-task/new");
     cy.checkElement(element[7]);
   });
