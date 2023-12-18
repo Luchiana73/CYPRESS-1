@@ -1,0 +1,62 @@
+[
+  {
+    "username": "john",
+    "email": "john@test.gmail.com",
+    "password1": "john12345",
+    "password2": "john12345"
+  },
+  {
+    "username": " ",
+    "email": "john@test.com",
+    "password1": "john456",
+    "password2": "john456"
+  },
+  {
+    "username": "sarah",
+    "email": "sarah$sarah.test.com",
+    "password1": "sarah%1234",
+    "password2": "sarah%1234"
+  },
+  {
+    "username": "volpe",
+    "email": " ",
+    "password1": "volpe£123",
+    "password2": "volpe£123"
+  },
+  {
+    "username": "jonathan",
+    "email": "jonathan@test.com",
+    "password1": "jonathan$%123",
+    "password2": "jonathan$%123"
+  },
+  {
+    "username": "benjamin",
+    "email": "benjamin@test.com",
+    "password1": "benjamin$%1",
+    "password2": "benjamin$%123"
+  },
+  {
+    "username": "alice",
+    "email": "alice@alice.test.com",
+    "password1": "%&23",
+    "password2": "%&23"
+  },
+  {
+    "username": "sputnik",
+    "email": "sputnik@mail.ru",
+    "password1": "£$%",
+    "password2": "£$%"
+  },
+  {
+    "username": "sputnik$",
+    "email": "sputnik@mail.ru",
+    "password1": "sassolungo$",
+    "password2": "sassolungo$"
+  },
+  {
+    "username": "спутник",
+    "email": "sputnik@mail.ru",
+    "password1": "sassolungo$",
+    "password2": "sassolungo$"
+  }
+]

@@ -37,3 +37,44 @@ Cypress.Commands.add("clickSecondEl", (selector1, selector2) => {
 Cypress.Commands.add("checkUrl", (endpoint) => {
   cy.url().should("include", endpoint);
 });
+
+Cypress.Commands.add("loginAdmin", () => {
+  const username = "admin";
+  const password = "admin";
+  cy.visit("/login");
+  cy.get('input[name="username"]').type(username);
+  cy.get('input[name="password"]').type(password);
+  cy.get('button[type="submit"]').click();
+  cy.get("#admin-menu").click();
+  cy.get(".dropdown-menu")
+    .find(".dropdown-item[href='/admin/user-management']")
+    .click();
+  cy.get(".page-link[aria-label='Last']").click();
+});
+
+Cypress.Commands.add("registerUser", (user) => {
+  cy.get('input[name="username"]').type(user.username);
+  cy.get('input[name="email"]').type(user.email);
+  cy.get('input[name="firstPassword"]').type(user.password1);
+  cy.get('input[name="secondPassword"]').type(user.password2);
+  cy.get("#register-submit").click();
+});
+
+Cypress.Commands.add("userLogin", (user) => {
+  cy.get('input[name="username"]').type(user.username);
+  cy.get('input[name="password"]').type(user.password);
+  cy.get('button[type="submit"]').click();
+});
+
+Cypress.Commands.add("deleteUser", (user) => {
+  cy.get(user).contains("Delete").click();
+  cy.get(".modal-content").should("be.visible");
+  cy.contains("Delete").click();
+});
+
+Cypress.Commands.add("getErrorMessage", (message) => {
+  cy.get(".invalid-feedback").should("be.visible").and("contain", message);
+});
+Cypress.Commands.add("failedLogin", (message) => {
+  cy.get(`[data-cy="loginError"]`).should("be.visible").and("contain", message);
+});

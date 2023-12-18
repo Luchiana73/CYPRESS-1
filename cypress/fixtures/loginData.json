@@ -1,0 +1,28 @@
+{
+  "data1": {
+    "username": "susan",
+    "email": "susan@test.susan.com",
+    "password1": "susan%&23",
+    "password2": "susan%&23"
+  },
+  "data2": {
+    "username": "susan",
+    "email": "susan@test.susan.com",
+    "password": "susan%&23"
+  },
+  "data3": {
+    "username": "susan23",
+    "email": "susan@test.susan.com",
+    "password": "susan%&23"
+  },
+  "data4": {
+    "username": "susan",
+    "email": "susan@test.susan.com",
+    "password": "susan&2"
+  },
+  "data5": {
+    "username": "susan",
+    "email": "susan@test.susan.com",
+    "password": " "
+  }
+}
