@@ -10,10 +10,7 @@ describe("Test Login Page", () => {
       cy.loginAdmin().then(() => {
         cy.get(`#${user.username}`).contains("Edit").click();
       });
-      cy.get("#activated").check();
-      cy.get('button[type="submit"]').click();
-      cy.get("#account-menu").click();
-      cy.get(".dropdown-menu").find(".dropdown-item[href='/logout']").click();
+      cy.activateUser();
     });
   });
 

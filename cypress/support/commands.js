@@ -60,6 +60,13 @@ Cypress.Commands.add("registerUser", (user) => {
   cy.get("#register-submit").click();
 });
 
+Cypress.Commands.add("activateUser", () => {
+  cy.get("#activated").check();
+  cy.get('button[type="submit"]').click();
+  cy.get("#account-menu").click();
+  cy.get(".dropdown-menu").find(".dropdown-item[href='/logout']").click();
+});
+
 Cypress.Commands.add("userLogin", (user) => {
   cy.get('input[name="username"]').type(user.username);
   cy.get('input[name="password"]').type(user.password);
@@ -70,6 +77,15 @@ Cypress.Commands.add("deleteUser", (user) => {
   cy.get(user).contains("Delete").click();
   cy.get(".modal-content").should("be.visible");
   cy.contains("Delete").click();
+});
+
+Cypress.Commands.add("changePassword", (oldPassword, newPassword) => {
+  cy.get("#account-menu").click();
+  cy.get('[data-cy="passwordItem"]').click();
+  cy.get('[data-cy="currentPassword"]').type(oldPassword);
+  cy.get('[data-cy="newPassword"]').type(newPassword);
+  cy.get('[data-cy="confirmPassword"]').type(newPassword);
+  cy.contains("Save").click();
 });
 
 Cypress.Commands.add("getErrorMessage", (message) => {
