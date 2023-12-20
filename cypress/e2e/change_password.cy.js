@@ -1,10 +1,7 @@
 import { faker } from "@faker-js/faker";
-import { LoginPage } from "../pages/loginPage";
-import { LogoutPage } from "../pages/logoutPage";
+const loginPageElements = require("../fixtures/pages/loginPageSelectors.json");
 
 describe("Change password", () => {
-  let loginPage = new LoginPage();
-  let logoutPage = new LogoutPage();
   let oldPassword = "sassolungo£$%";
   let newPassword = faker.internet.password(10);
   before(() => {
@@ -22,7 +19,7 @@ describe("Change password", () => {
 
   after(() => {
     //logout
-    logoutPage.logout();
+    cy.logoutUser();
     //login admin
     cy.loginAdmin();
     //delete
@@ -31,20 +28,18 @@ describe("Change password", () => {
 
   it("User can login only with new password", () => {
     //user login
-    cy.visit("/login");
-    loginPage.login("anton", oldPassword);
+    cy.loginUser("anton", oldPassword);
     //change password
     cy.changePassword(oldPassword, newPassword);
     cy.log(newPassword);
     //logout
-    logoutPage.logout();
+    cy.logoutUser();
     //login with old password
-    cy.visit("/login");
-    loginPage.login("anton", oldPassword);
+    cy.loginUser("anton", oldPassword);
     cy.contains("Failed to sign in!").should("exist");
     //login with new password
-    loginPage.elements.passwordField().clear().type(newPassword);
-    loginPage.elements.loginButton().click();
+    cy.get(loginPageElements.passwordField).clear().type(newPassword);
+    cy.get(loginPageElements.loginButton).click();
     //change password
     cy.changePassword(newPassword, oldPassword);
   });

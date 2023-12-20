@@ -1,0 +1,5 @@
+{
+  "accountMenu": "#account-menu",
+  "dropdownMenu": ".dropdown-menu",
+  "logoutLink": ".dropdown-item[href='/logout']"
+}
