@@ -1,0 +1,16 @@
+[
+  {
+    "username": "gabriela",
+    "email": "gabri.admin@test.com",
+    "password1": "sassolungo£$%",
+    "password2": "sassolungo£$%",
+    "role": "ROLE_ADMIN"
+  },
+  {
+    "username": "ilenia",
+    "email": "ilenia.student@test.com",
+    "password1": "sassopiatto£$12",
+    "password2": "sassopiatto£$12",
+    "role": "ROLE_USER_STUDENT"
+  }
+]

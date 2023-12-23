@@ -67,6 +67,13 @@ Cypress.Commands.add("activateUser", () => {
   cy.get(".dropdown-menu").find(".dropdown-item[href='/logout']").click();
 });
 
+Cypress.Commands.add("activateUserWithRole", (user, role) => {
+  cy.get(user).contains("Edit").click();
+  cy.get("#activated").check();
+  cy.get("#authorities").select(role);
+  cy.get('button[type="submit"]').click();
+});
+
 Cypress.Commands.add("userLogin", (user) => {
   cy.get('input[name="username"]').type(user.username);
   cy.get('input[name="password"]').type(user.password);
