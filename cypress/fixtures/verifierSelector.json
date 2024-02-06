@@ -1,8 +1,8 @@
 [
   "button[type=\"submit\"]",
   ".jh-create-entity[href='/task/new']",
-  ".btn-info[href='/task/1103']",
-  ".btn-primary[href='/task/1103/edit']",
+  ":nth-child(1) > div > [data-cy='entityDetailsButton']",
+  ".btn-primary > .d-none > span",
   "a.btn",
   "#jh-create-entity"
 ]

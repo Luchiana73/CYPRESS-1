@@ -9,7 +9,9 @@
     "cy:run:first": "npx cypress run --spec cypress/e2e/sql_verifier_first.cy.js --browser chrome --record --key 10b4f1fe-c9c0-4f86-8e19-7a5473013031",
     "cy:run:staging": "npx cypress run --spec cypress/e2e/sql_verifier_staging.cy.js --browser electron --record --key 10b4f1fe-c9c0-4f86-8e19-7a5473013031",
     "cy:open:dashboard": "npx cypress run --record --key 10b4f1fe-c9c0-4f86-8e19-7a5473013031",
-    "cy:run:both": "npm run cy:run:first && npm run cy:run:staging"
+    "cy:run:both": "npm run cy:run:first && npm run cy:run:staging",
+    "cy:junit": "npx cypress run --reporter mocha-junit-reporter",
+    "jira-upload": "curl -H @headers.txt --data @\"C:/Users/Sveta/Desktop/IT-Switcher/CYPRESS-1/test-results.xml\" https://xray.cloud.getxray.app/api/v1/import/execution/junit?projectKey=SV"
   },
   "keywords": [
     "cypress"
@@ -19,6 +21,7 @@
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",
     "cypress": "^13.6.1",
-    "cypress-iframe": "^1.0.1"
+    "cypress-iframe": "^1.0.1",
+    "mocha-junit-reporter": "^2.2.1"
   }
 }

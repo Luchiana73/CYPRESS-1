@@ -39,8 +39,8 @@ Cypress.Commands.add("checkUrl", (endpoint) => {
 });
 
 Cypress.Commands.add("loginAdmin", () => {
-  const username = "admin";
-  const password = "admin";
+  const username = "admin_automation";
+  const password = "admin_automation";
   cy.visit("/login");
   cy.get('input[name="username"]').type(username);
   cy.get('input[name="password"]').type(password);

@@ -1,7 +1,7 @@
 [
   "button.me-2",
   "#save-entity",
-  ".btn-primary[href='/task/1103/edit']",
+  ".btn-primary > .d-none > span",
   "#task-title",
   ".jh-create-entity[href='/user-task/new']",
   ".alert-warning",

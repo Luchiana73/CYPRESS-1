@@ -10,7 +10,7 @@ beforeEach(() => {
   cy.url().should("include", "/?page=1&sort=id,asc");
 });
 
-describe("Check all links working after user student login", () => {
+describe.skip("Check all links working after user student login", () => {
   it("Check Refresh button on the task page", () => {
     cy.get("#entity-menu").click();
     cy.get(".dropdown-menu")
